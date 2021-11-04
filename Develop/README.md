@@ -22,9 +22,40 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 ## Description:
 I wanted to make a backend app that furthered my understanding of MVC without the view. This includes creating a class/model and controllers/routes.
-I built this app to better my understanding of the backend of applications and how servers, databases, routes all talk to eachother.
+I built this app to better my understanding of the backend of applications and how servers, databases, routes all talk to each other.
 This app gave me a better understanding of the backend of applications
 I learned models, controllers, databases and how to interact with them
+
+* Link to video of using app in insomnia 
+https://drive.google.com/file/d/1ou4QVwnbSYBFBqUgAWdDeu1Ps2LPtlAq/view?usp=sharing
+
+<img src="./img/terminal.png" alt="terminal interactions with insomnia while using app">
+
+* routing
+```
+router.post('/', async (req, res) => {
+  // create a new category
+  try {
+    const categoryData = await Category.create(req.body);
+    res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+```
+
+* Modelling and creating relationships
+```
+// Categories have many Products
+Category.hasMany(Product, {
+  foreignKey: 'category_id',
+})
+
+// Products belongsTo Category
+Product.belongsTo(Category, {
+  foreignKey: 'category_id',
+})
+```
 
 ## Installation:
 You must use an npm install to get the dependencies and use your database login information to correctly start and seed into the database.
